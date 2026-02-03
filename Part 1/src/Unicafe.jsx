@@ -13,10 +13,11 @@ const StatisticLine = ({ text, value }) => (
     </tr>
 )
 
-const Statistics = ({ good, neutral, bad }) => {
-    const all = good + neutral + bad
-    const average = all === 0 ? 0 : (good - bad) / all
-    const positive = all === 0 ? 0 : (good / all) * 100
+const Statistics = ({ good, neutral, bad, verygood }) => {
+    const all = good + neutral + bad + verygood
+    // Logic: verygood = 2, good = 1, neutral = 0, bad = -1
+    const average = all === 0 ? 0 : (verygood * 2 + good - bad) / all
+    const positive = all === 0 ? 0 : ((good + verygood) / all) * 100
 
     if (all === 0) {
         return (
@@ -32,6 +33,7 @@ const Statistics = ({ good, neutral, bad }) => {
             <h2>statistics</h2>
             <table>
                 <tbody>
+                    <StatisticLine text="very good" value={verygood} />
                     <StatisticLine text="good" value={good} />
                     <StatisticLine text="neutral" value={neutral} />
                     <StatisticLine text="bad" value={bad} />
@@ -48,16 +50,18 @@ const Unicafe = () => {
     const [good, setGood] = useState(0)
     const [neutral, setNeutral] = useState(0)
     const [bad, setBad] = useState(0)
+    const [verygood, setVerygood] = useState(0)
 
     return (
         <div>
             <h2>give feedback</h2>
             <div>
+                <Button handleClick={() => setVerygood(verygood + 1)} text="very good" />
                 <Button handleClick={() => setGood(good + 1)} text="good" />
                 <Button handleClick={() => setNeutral(neutral + 1)} text="neutral" />
                 <Button handleClick={() => setBad(bad + 1)} text="bad" />
             </div>
-            <Statistics good={good} neutral={neutral} bad={bad} />
+            <Statistics good={good} neutral={neutral} bad={bad} verygood={verygood} />
         </div>
     )
 }
