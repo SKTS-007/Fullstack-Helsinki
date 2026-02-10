@@ -1,52 +1,8 @@
-require('dotenv').config(); // <--- Add this at the very top
-
-const express = require('express');
-const mongoose = require('mongoose');
-const app = express();
-
-// Now these variables will be defined
-const PORT = process.env.PORT || 3000;
-const MONGO_URL = process.env.MONGODB_URI;
-
-mongoose.connect(MONGO_URL)
-    .then(() => {
-        console.log('Connected to MongoDB');
-        app.listen(PORT, () => {
-            console.log(`Server running on port ${PORT}`);
-        });
-    })
-    .catch((error) => {
-        console.error('Error connecting to MongoDB:', error.message);
-    });
-
-let persons = [
-    {
-        "id": 1,
-        "name": "Arto Hellas",
-        "number": "040-123456"
-    },
-    {
-        "id": 2,
-        "name": "Ada Lovelace",
-        "number": "39-44-5323523"
-    },
-    {
-        "id": 3,
-        "name": "Dan Abramov",
-        "number": "12-43-234345"
-    },
-    {
-        "id": 4,
-        "name": "Mary Poppendieck",
-        "number": "39-23-6423122"
-    }
-]
-const mongoose = require('mongoose')
+require('dotenv').config({ path: 'hello.env' })
 const express = require("express")
 const app = express()
 var morgan = require('morgan')
 app.use(express.static('build'))
-require('dotenv').config()
 
 const Person = require('./models/Person')
 
