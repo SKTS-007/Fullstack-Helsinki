@@ -61,7 +61,11 @@ const App = () => {
                     setPersons(persons.concat(returnedPerson))
                     setNewName('')
                     setNewNumber('')
-                    showNotification(`Added ${returnedPerson.name}`, 'success')
+                    //showNotification(`Added ${returnedPerson.name}`, 'success')
+                })
+                .catch(error => {
+                    showNotification(error.response.data.error, 'error')
+                    console.log(error.response.data.error)
                 })
         }
     }
