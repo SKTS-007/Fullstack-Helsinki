@@ -1,19 +1,9 @@
 {
   "persons": [
     {
-      "name": "SIDDHARTH",
-      "number": "23",
-      "id": 5
-    },
-    {
-      "name": "SOORYAKIRAN",
-      "number": "67",
-      "id": 6
-    },
-    {
-      "name": "soo",
+      "name": "Soorya",
       "number": "11111",
-      "id": 7
+      "id": 1
     }
   ]
 }
