@@ -1,31 +1,16 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
+      "name": "soorya",
+      "number": "222222222",
+      "place": "aaaaaaaa",
       "id": 1
     },
     {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
+      "name": "sooryaaaaaa",
+      "number": "111a1",
+      "place": "aaaaaa",
       "id": 2
-    },
-    {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
-      "id": 4
-    },
-    {
-      "name": "SIDDHARTH",
-      "number": "6282671991",
-      "place": "Kannur",
-      "id": 5
-    },
-    {
-      "name": "weffew",
-      "number": "3676734",
-      "place": "Kochi",
-      "id": 6
     }
   ]
 }
