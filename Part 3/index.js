@@ -1,3 +1,24 @@
+require('dotenv').config(); // <--- Add this at the very top
+
+const express = require('express');
+const mongoose = require('mongoose');
+const app = express();
+
+// Now these variables will be defined
+const PORT = process.env.PORT || 3000;
+const MONGO_URL = process.env.MONGODB_URI;
+
+mongoose.connect(MONGO_URL)
+    .then(() => {
+        console.log('Connected to MongoDB');
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    })
+    .catch((error) => {
+        console.error('Error connecting to MongoDB:', error.message);
+    });
+
 let persons = [
     {
         "id": 1,
@@ -61,7 +82,7 @@ const url = process.env.url;
 //     res.send("Hello")
 // })
 
-app.get('/info' , (req,res,next) =>{
+app.get('/info', (req, res, next) => {
     Person.find({}).then(person => {
         res.send(`<p>Phonebook has info for ${person.length} people</p>
         <p>${new Date()}</p>
@@ -69,14 +90,14 @@ app.get('/info' , (req,res,next) =>{
     })
 })
 
-app.get('/api/persons',(req,res,next)=>{
-    Person.find({}).then(person=>{
+app.get('/api/persons', (req, res, next) => {
+    Person.find({}).then(person => {
         res.json(person)
     }).catch(error => next(error))
 
 })
 
-app.get('/api/persons/:id', (request, response,next) => {
+app.get('/api/persons/:id', (request, response, next) => {
     Person.findById(request.params.id)
         .then(person => {
             if (person) {
@@ -88,7 +109,7 @@ app.get('/api/persons/:id', (request, response,next) => {
         .catch(error => next(error))
 })
 
-app.delete('/api/persons/:id', (request, response,next) => {
+app.delete('/api/persons/:id', (request, response, next) => {
     Person.findByIdAndRemove(request.params.id)
         .then(result => {
             response.status(204).end()
@@ -96,7 +117,7 @@ app.delete('/api/persons/:id', (request, response,next) => {
         .catch(error => next(error))
 })
 
-app.put('/api/persons/:id', (request, response,next) => {
+app.put('/api/persons/:id', (request, response, next) => {
     const body = request.body
 
     const contact = {
@@ -119,8 +140,8 @@ app.post('/api/persons', (req, res) => {
     // console.log(body.number,body.number.length!=0==true);
     // console.log(persons.filter(person => person.name === body.name),(persons.filter(person => person.name === body.name).length ===0)==true);
     console.log(!Person.find({ name: body.name }));
-    if ((body.name.length != 0 ) &&
-        (body.number.length != 0 ) 
+    if ((body.name.length != 0) &&
+        (body.number.length != 0)
     ) {
         const person = new Person(
             {
@@ -128,18 +149,18 @@ app.post('/api/persons', (req, res) => {
                 number: body.number
             }
         )
-        
-        person.save().then(svaedPerson=>res.json(svaedPerson))
 
-    }else if (!body.name && !body.number){
+        person.save().then(svaedPerson => res.json(svaedPerson))
+
+    } else if (!body.name && !body.number) {
         return res.status(400).json({
             error: 'name and number missing'
         })
-    }else if (!body.name){
+    } else if (!body.name) {
         return res.status(400).json({
             error: 'name missing'
         })
-    }else if (!body.number){
+    } else if (!body.number) {
         return res.status(400).json({
             error: 'number missing'
         })
@@ -151,9 +172,9 @@ app.post('/api/persons', (req, res) => {
         }
     )
     person.save()
-        .then(savedPerson=>res.json(savedPerson))
-        // .catch(error =>  next(error))
-    
+        .then(savedPerson => res.json(savedPerson))
+    // .catch(error =>  next(error))
+
 
     // console.log(persons);
 });
