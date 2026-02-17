@@ -11,6 +11,12 @@
       "number": "111a1",
       "place": "aaaaaa",
       "id": 2
+    },
+    {
+      "name": "",
+      "number": "",
+      "place": "ddddd",
+      "id": 3
     }
   ]
 }
